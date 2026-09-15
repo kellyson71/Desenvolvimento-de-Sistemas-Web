@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<p id="numero">0</p>
+<button onclick="diminuir()">-</button>
+<button onclick="aumentar()">+</button>
+
+<script>
+  var valor = 0;
+  var numero = document.getElementById("numero");
+
+  function aumentar() {
+    valor++;
+    numero.textContent = valor;
+  }
+
+  function diminuir() {
+    valor--;
+    numero.textContent = valor;
+  }
+</script>

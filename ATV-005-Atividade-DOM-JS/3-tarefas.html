@@ -1,0 +1,20 @@
+<meta charset="utf-8">
+<ul id="tarefas">
+  <li>Lavar a louça</li>
+  <li>Estudar JavaScript</li>
+  <li>Fazer compras</li>
+  <li>Passear com o cachorro</li>
+</ul>
+
+<script>
+  var itens = document.querySelectorAll("#tarefas li");
+  for (var i = 0; i < itens.length; i++) {
+    itens[i].addEventListener("click", function () {
+      if (this.style.textDecoration === "line-through") {
+        this.style.textDecoration = "none";
+      } else {
+        this.style.textDecoration = "line-through";
+      }
+    });
+  }
+</script>
