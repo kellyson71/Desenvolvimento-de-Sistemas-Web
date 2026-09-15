@@ -1,0 +1,17 @@
+<meta charset="utf-8">
+<ul id="lista">
+  <li>Item</li>
+  <li>Item bem grande com bastante texto</li>
+  <li>Curto</li>
+  <li>Outro item com texto longo para testar o destaque</li>
+</ul>
+
+<script>
+  var limite = 20;
+  var itens = document.querySelectorAll("#lista li");
+  for (var i = 0; i < itens.length; i++) {
+    if (itens[i].textContent.length > limite) {
+      itens[i].className = "destaque";
+    }
+  }
+</script>
