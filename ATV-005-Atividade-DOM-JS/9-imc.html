@@ -1,0 +1,32 @@
+<meta charset="utf-8">
+<form id="form">
+  Peso (kg): <input type="text" id="peso"><br>
+  Altura (m): <input type="text" id="altura"><br>
+  <button type="submit">Calcular</button>
+</form>
+
+<div id="resultado"></div>
+
+<script>
+  document.getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    var peso = parseFloat(document.getElementById("peso").value);
+    var altura = parseFloat(document.getElementById("altura").value);
+    var imc = peso / (altura * altura);
+    var classificacao;
+
+    if (imc < 18.5) {
+      classificacao = "Abaixo do peso";
+    } else if (imc < 25) {
+      classificacao = "Peso normal";
+    } else if (imc < 30) {
+      classificacao = "Sobrepeso";
+    } else {
+      classificacao = "Obesidade";
+    }
+
+    document.getElementById("resultado").textContent =
+      "IMC: " + imc.toFixed(2) + " - " + classificacao;
+  });
+</script>

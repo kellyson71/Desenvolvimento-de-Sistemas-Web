@@ -1,0 +1,25 @@
+<meta charset="utf-8">
+<ul id="estoque"></ul>
+
+<script>
+  var produtos = [
+    { nome: "Arroz", quantidade: 10, minimo: 5 },
+    { nome: "Feijão", quantidade: 2, minimo: 5 },
+    { nome: "Açúcar", quantidade: 0, minimo: 3 },
+    { nome: "Óleo", quantidade: 8, minimo: 4 }
+  ];
+
+  var lista = document.getElementById("estoque");
+
+  for (var i = 0; i < produtos.length; i++) {
+    var p = produtos[i];
+    var li = document.createElement("li");
+    li.textContent = p.nome + " - Quantidade: " + p.quantidade;
+
+    if (p.quantidade < p.minimo) {
+      li.className = "abaixo-minimo";
+    }
+
+    lista.appendChild(li);
+  }
+</script>
