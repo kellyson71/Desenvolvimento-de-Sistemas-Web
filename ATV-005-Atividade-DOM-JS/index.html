@@ -1,0 +1,167 @@
+<hr><h2>1-lista.html</h2>
+<meta charset="utf-8">
+<ul id="lista">
+  <li>Item</li>
+  <li>Item bem grande com bastante texto</li>
+  <li>Curto</li>
+  <li>Outro item com texto longo para testar o destaque</li>
+</ul>
+
+<script>
+  var limite = 20;
+  var itens = document.querySelectorAll("#lista li");
+  for (var i = 0; i < itens.length; i++) {
+    if (itens[i].textContent.length > limite) {
+      itens[i].className = "destaque";
+    }
+  }
+</script>
+<hr><h2>2-contador.html</h2>
+<meta charset="utf-8">
+<p id="numero">0</p>
+<button onclick="diminuir()">-</button>
+<button onclick="aumentar()">+</button>
+
+<script>
+  var valor = 0;
+  var numero = document.getElementById("numero");
+
+  function aumentar() {
+    valor++;
+    numero.textContent = valor;
+  }
+
+  function diminuir() {
+    valor--;
+    numero.textContent = valor;
+  }
+</script>
+<hr><h2>3-tarefas.html</h2>
+<meta charset="utf-8">
+<ul id="tarefas">
+  <li>Lavar a louça</li>
+  <li>Estudar JavaScript</li>
+  <li>Fazer compras</li>
+  <li>Passear com o cachorro</li>
+</ul>
+
+<script>
+  var itens = document.querySelectorAll("#tarefas li");
+  for (var i = 0; i < itens.length; i++) {
+    itens[i].addEventListener("click", function () {
+      if (this.style.textDecoration === "line-through") {
+        this.style.textDecoration = "none";
+      } else {
+        this.style.textDecoration = "line-through";
+      }
+    });
+  }
+</script>
+<hr><h2>4-tema.html</h2>
+<meta charset="utf-8">
+<body>
+  <button onclick="alternarTema()">Alternar tema</button>
+  <p>Texto de exemplo na página.</p>
+
+  <script>
+    var escuro = false;
+
+    function alternarTema() {
+      escuro = !escuro;
+      if (escuro) {
+        document.body.style.backgroundColor = "black";
+        document.body.style.color = "white";
+      } else {
+        document.body.style.backgroundColor = "white";
+        document.body.style.color = "black";
+      }
+    }
+  </script>
+</body>
+<hr><h2>5-cadastro.html</h2>
+<meta charset="utf-8">
+<form id="form">
+  Nome: <input type="text" id="nome"><br>
+  E-mail: <input type="text" id="email"><br>
+  Idade: <input type="text" id="idade"><br>
+  <button type="submit">Enviar</button>
+</form>
+
+<div id="resultado"></div>
+
+<script>
+  document.getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    var nome = document.getElementById("nome").value;
+    var email = document.getElementById("email").value;
+    var idade = document.getElementById("idade").value;
+
+    if (nome === "" || email === "" || idade === "") {
+      document.getElementById("resultado").textContent = "Preencha todos os campos.";
+      return;
+    }
+
+    document.getElementById("resultado").textContent =
+      "Nome: " + nome + " | E-mail: " + email + " | Idade: " + idade;
+  });
+</script>
+<hr><h2>9-imc.html</h2>
+<meta charset="utf-8">
+<form id="form">
+  Peso (kg): <input type="text" id="peso"><br>
+  Altura (m): <input type="text" id="altura"><br>
+  <button type="submit">Calcular</button>
+</form>
+
+<div id="resultado"></div>
+
+<script>
+  document.getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    var peso = parseFloat(document.getElementById("peso").value);
+    var altura = parseFloat(document.getElementById("altura").value);
+    var imc = peso / (altura * altura);
+    var classificacao;
+
+    if (imc < 18.5) {
+      classificacao = "Abaixo do peso";
+    } else if (imc < 25) {
+      classificacao = "Peso normal";
+    } else if (imc < 30) {
+      classificacao = "Sobrepeso";
+    } else {
+      classificacao = "Obesidade";
+    }
+
+    document.getElementById("resultado").textContent =
+      "IMC: " + imc.toFixed(2) + " - " + classificacao;
+  });
+</script>
+<hr><h2>10-estoque.html</h2>
+<meta charset="utf-8">
+<ul id="estoque"></ul>
+
+<script>
+  var produtos = [
+    { nome: "Arroz", quantidade: 10, minimo: 5 },
+    { nome: "Feijão", quantidade: 2, minimo: 5 },
+    { nome: "Açúcar", quantidade: 0, minimo: 3 },
+    { nome: "Óleo", quantidade: 8, minimo: 4 }
+  ];
+
+  var lista = document.getElementById("estoque");
+
+  for (var i = 0; i < produtos.length; i++) {
+    var p = produtos[i];
+    var li = document.createElement("li");
+    li.textContent = p.nome + " - Quantidade: " + p.quantidade;
+
+    if (p.quantidade < p.minimo) {
+      li.className = "abaixo-minimo";
+    }
+
+    lista.appendChild(li);
+  }
+</script>
