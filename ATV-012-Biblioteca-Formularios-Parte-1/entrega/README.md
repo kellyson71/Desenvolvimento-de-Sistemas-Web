@@ -1,5 +1,5 @@
-Biblioteca em Django, agora com cadastro de autores por formulário (`AuthorForm`, um ModelForm). A página fica em `/autores/novo/` e o link "Novo autor" está na lista de livros. Depois de salvar, a view faz redirect para a página do autor, então F5 não cria outro.
+Biblioteca em Django (continuação da atividade de relacionamentos), agora com cadastro de autor por formulário. A página fica em `/autores/novo/` e a lista de livros tem o link "Novo autor". Depois de salvar, a view redireciona para a página do autor, então dar F5 nela não cadastra de novo.
 
-Para rodar: `pip install django`, `python manage.py migrate` e `python manage.py runserver`. Os testes: `python manage.py test`.
+Para rodar: `pip install django`, `python manage.py migrate` e `python manage.py runserver`. Testes: `python manage.py test`.
 
-Sem o `{% csrf_token %}` no template, o POST é recusado pelo Django com erro 403 (Forbidden, "CSRF verification failed") e o autor não é salvo. O teste `test_sem_token_csrf_e_rejeitado` confere isso. Sem essa proteção, qualquer outro site poderia enviar um POST para essa URL usando o navegador do usuário e cadastrar autores sem ele perceber.
+Teste do CSRF: tirei o `{% csrf_token %}` do template e mandei o formulário. O Django recusou com 403 Proibido, "Verificação CSRF falhou. Pedido cancelado.", e o autor não foi salvo. Com o token de volta, salva normal. Sem essa proteção qualquer outro site poderia fazer o navegador de quem está logado enviar esse POST sem a pessoa saber.

@@ -24,7 +24,7 @@
         <thead>
             <tr>
                 <th>Título</th>
-                <th>Autores</th>
+                <th>Autor</th>
                 <th>Ano</th>
                 <th>Disponível</th>
             </tr>
@@ -33,11 +33,7 @@
             {% for livro in livros %}
             <tr>
                 <td>{{ livro.title }}</td>
-                <td>
-                    {% for autor in livro.authors.all %}
-                        <a href="{% url 'biblioteca:author_detail' autor.pk %}">{{ autor.name }}</a>{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                </td>
+                <td><a href="{% url 'biblioteca:author_detail' livro.author.pk %}">{{ livro.author.name }}</a></td>
                 <td>{{ livro.year }}</td>
                 <td>
                     {% if livro.available %}

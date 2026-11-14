@@ -4,10 +4,9 @@ from .models import Author, Book, Category
 
 
 class BookInline(admin.TabularInline):
-    model = Book.authors.through
+    model = Book
     extra = 1
-    verbose_name = "livro"
-    verbose_name_plural = "livros"
+    filter_horizontal = ("categories",)
 
 
 @admin.register(Author)
@@ -24,11 +23,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ("title", "autores", "year", "available")
-    search_fields = ("title", "authors__name")
+    list_display = ("title", "author", "year", "available")
+    search_fields = ("title", "author__name")
     list_filter = ("available", "categories")
-    filter_horizontal = ("authors", "categories")
-
-    @admin.display(description="Autores")
-    def autores(self, livro):
-        return ", ".join(autor.name for autor in livro.authors.all())
+    filter_horizontal = ("categories",)

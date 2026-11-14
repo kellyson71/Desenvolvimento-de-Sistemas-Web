@@ -28,10 +28,11 @@ class Category(models.Model):
 
 class Book(models.Model):
     title = models.CharField("título", max_length=200)
-    authors = models.ManyToManyField(
+    author = models.ForeignKey(
         Author,
+        on_delete=models.PROTECT,
         related_name="books",
-        verbose_name="autores",
+        verbose_name="autor",
     )
     categories = models.ManyToManyField(
         Category,
