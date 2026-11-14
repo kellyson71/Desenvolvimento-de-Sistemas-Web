@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo autor</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; }
+        h1 { text-align: center; }
+        a { color: #06c; }
+        .campo { margin-bottom: 16px; }
+        label { display: block; font-weight: bold; margin-bottom: 4px; }
+        input[type=text] { width: 100%; padding: 6px; box-sizing: border-box; }
+        .erro { color: #b00; margin: 4px 0 0; }
+        button { padding: 8px 16px; }
+    </style>
+</head>
+<body>
+    <p><a href="{% url 'biblioteca:listar_livros' %}">&larr; Voltar para a lista</a></p>
+    <h1>Novo autor</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {% for erro in form.non_field_errors %}
+            <p class="erro">{{ erro }}</p>
+        {% endfor %}
+
+        <div class="campo">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+            {% for erro in form.name.errors %}
+                <p class="erro">{{ erro }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="campo">
+            {{ form.nationality.label_tag }}
+            {{ form.nationality }}
+            {% for erro in form.nationality.errors %}
+                <p class="erro">{{ erro }}</p>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

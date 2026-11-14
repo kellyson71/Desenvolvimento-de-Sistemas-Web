@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titulo }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; }
+        h1 { text-align: center; }
+        a { color: #06c; }
+        .campo { margin-bottom: 16px; }
+        .campo > label { display: block; font-weight: bold; margin-bottom: 4px; }
+        input[type=text], input[type=number], select { width: 100%; padding: 6px; box-sizing: border-box; }
+        .campo.marcar > label { display: inline; }
+        .opcoes div { margin: 2px 0; }
+        .erro { color: #b00; margin: 4px 0 0; }
+        button { padding: 8px 16px; }
+    </style>
+</head>
+<body>
+    <p><a href="{% url 'biblioteca:listar_livros' %}">&larr; Voltar para a lista</a></p>
+    <h1>{{ titulo }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {% for erro in form.non_field_errors %}
+            <p class="erro">{{ erro }}</p>
+        {% endfor %}
+
+        <div class="campo">
+            {{ form.title.label_tag }}
+            {{ form.title }}
+            {% for erro in form.title.errors %}
+                <p class="erro">{{ erro }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="campo">
+            {{ form.author.label_tag }}
+            {{ form.author }}
+            {% for erro in form.author.errors %}
+                <p class="erro">{{ erro }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="campo">
+            {{ form.year.label_tag }}
+            {{ form.year }}
+            {% for erro in form.year.errors %}
+                <p class="erro">{{ erro }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="campo marcar">
+            {{ form.available }} {{ form.available.label_tag }}
+            {% for erro in form.available.errors %}
+                <p class="erro">{{ erro }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="campo">
+            <label>{{ form.categories.label }}</label>
+            <div class="opcoes">
+                {% for opcao in form.categories %}
+                    <div>{{ opcao.tag }} <label for="{{ opcao.id_for_label }}">{{ opcao.choice_label }}</label></div>
+                {% empty %}
+                    <p>Nenhuma categoria cadastrada.</p>
+                {% endfor %}
+            </div>
+            {% for erro in form.categories.errors %}
+                <p class="erro">{{ erro }}</p>
+            {% endfor %}
+        </div>
+
+        <button type="submit">{{ botao }}</button>
+    </form>
+</body>
+</html>
