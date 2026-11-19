@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sobre</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; }
+        h1 { text-align: center; }
+        a { color: #06c; }
+    </style>
+</head>
+<body>
+    <p><a href="{% url 'biblioteca:listar_livros' %}">&larr; Voltar para a lista</a></p>
+    <h1>Sobre a Mini Biblioteca</h1>
+    <p>Livros cadastrados: {{ total }}</p>
+    <p>Livros disponíveis: {{ disponiveis }}</p>
+</body>
+</html>

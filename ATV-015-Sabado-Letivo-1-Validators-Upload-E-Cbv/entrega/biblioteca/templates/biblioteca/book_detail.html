@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ livro.title }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; }
+        h1 { text-align: center; }
+        a { color: #06c; }
+        img.capa { display: block; margin: 0 auto 20px; max-width: 250px; }
+        .disponivel { color: green; font-weight: bold; }
+        .indisponivel { color: #b00; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <p><a href="{% url 'biblioteca:listar_livros' %}">&larr; Voltar para a lista</a></p>
+    <h1>{{ livro.title }}</h1>
+    {% if livro.capa %}<img class="capa" src="{{ livro.capa.url }}" alt="Capa de {{ livro.title }}">{% endif %}
+    <p>Autor: <a href="{% url 'biblioteca:author_detail' livro.author.pk %}">{{ livro.author.name }}</a></p>
+    <p>Ano: {{ livro.year }}</p>
+    {% if livro.pages %}<p>Páginas: {{ livro.pages }}</p>{% endif %}
+    {% if livro.isbn %}<p>ISBN: {{ livro.isbn }}</p>{% endif %}
+    {% if livro.categories.all %}<p>Categorias: {{ livro.categories.all|join:", " }}</p>{% endif %}
+    <p>Disponível:
+        {% if livro.available %}<span class="disponivel">Sim</span>{% else %}<span class="indisponivel">Não</span>{% endif %}
+    </p>
+    <p>
+        <a href="{% url 'biblioteca:book_edit' livro.pk %}">Editar</a> |
+        <a href="{% url 'biblioteca:book_delete' livro.pk %}">Excluir</a>
+    </p>
+</body>
+</html>

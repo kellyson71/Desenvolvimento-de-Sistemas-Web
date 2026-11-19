@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Biblioteca</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; }
+        h1 { text-align: center; }
+        a { color: #06c; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+        th { background: #333; color: #fff; }
+        tr:nth-child(even) { background: #f5f5f5; }
+        img.capa { width: 50px; height: 70px; object-fit: cover; }
+        .disponivel { color: green; font-weight: bold; }
+        .indisponivel { color: #b00; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Mini Biblioteca</h1>
+    <p>
+        <a href="{% url 'biblioteca:book_create' %}">Novo livro</a> |
+        <a href="{% url 'biblioteca:author_create' %}">Novo autor</a> |
+        <a href="{% url 'biblioteca:sobre' %}">Sobre</a>
+    </p>
+
+    {% if livros %}
+    <table>
+        <thead>
+            <tr>
+                <th>Capa</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Ano</th>
+                <th>Disponível</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for livro in livros %}
+            <tr>
+                <td>{% if livro.capa %}<img class="capa" src="{{ livro.capa.url }}" alt="Capa de {{ livro.title }}">{% endif %}</td>
+                <td><a href="{% url 'biblioteca:book_detail' livro.pk %}">{{ livro.title }}</a></td>
+                <td><a href="{% url 'biblioteca:author_detail' livro.author.pk %}">{{ livro.author.name }}</a></td>
+                <td>{{ livro.year }}</td>
+                <td>
+                    {% if livro.available %}
+                        <span class="disponivel">Sim</span>
+                    {% else %}
+                        <span class="indisponivel">Não</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'biblioteca:book_edit' livro.pk %}">Editar</a> |
+                    <a href="{% url 'biblioteca:book_delete' livro.pk %}">Excluir</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Nenhum livro cadastrado.</p>
+    {% endif %}
+</body>
+</html>

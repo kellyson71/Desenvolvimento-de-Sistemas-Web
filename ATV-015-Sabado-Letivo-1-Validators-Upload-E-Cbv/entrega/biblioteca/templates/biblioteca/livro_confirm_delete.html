@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir livro</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; }
+        h1 { text-align: center; }
+        a { color: #06c; }
+        button { padding: 8px 16px; }
+    </style>
+</head>
+<body>
+    <h1>Excluir livro</h1>
+    <p>Tem certeza que quer excluir "{{ livro.title }}"? Essa ação não pode ser desfeita.</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sim, excluir</button>
+        <a href="{% url 'biblioteca:listar_livros' %}">Cancelar</a>
+    </form>
+</body>
+</html>
